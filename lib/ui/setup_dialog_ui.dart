@@ -6,24 +6,31 @@ import 'package:stacked_services/stacked_services.dart';
 
 void setupDialogUi() {
   var dialogService = locator<DialogService>();
-
   dialogService.registerCustomDialogBuilder(
-    //TODO variant perlu dicari tahu, pleae refer to pub.dev
-    variant: null,
-    builder: (context, dialogRequest) => Dialog(
-      child: _customDialogUi(
-        dialogRequest,
-        (dialogResponse) => dialogService.completeDialog(dialogResponse),
-      ),
+    variant: DialogType.Form,
+    builder: (BuildContext context, DialogRequest dialogRequest) => Dialog(
+      backgroundColor: Colors.transparent,
+      child: Align(
+          alignment: Alignment.bottomCenter,
+          // child: customDialogUi(
+          //   dialogRequest,
+          //   (dialogRespone) => dialogService.completeDialog(dialogRespone),
+          // ),
+          child: _FormCustomDialog(
+            dialogRequest: dialogRequest,
+            onDialogTap: (dialogRespone) =>
+                dialogService.completeDialog(dialogRespone),
+          )),
     ),
   );
 }
 
-Widget _customDialogUi(
+Widget customDialogUi(
   DialogRequest dialogRequest,
   Function(DialogResponse) onDialogTap,
 ) {
   var dialogType = dialogRequest.customData as DialogType;
+  print('DialogType = $dialogType');
   switch (dialogType) {
     case DialogType.Form:
       return _FormCustomDialog(
@@ -111,47 +118,50 @@ class _FormCustomDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     var controller = useTextEditingController();
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            dialogRequest.title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: controller,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          GestureDetector(
-            // Complete the dialog when you're done with it to return some data
-            onTap: () =>
-                onDialogTap(DialogResponse(responseData: [controller.text])),
-            child: Container(
-              child: dialogRequest.showIconInMainButton
-                  ? Icon(Icons.check_circle)
-                  : Text(dialogRequest.mainButtonTitle),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(5),
-              ),
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              dialogRequest.title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
-          )
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: controller,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              // Complete the dialog when you're done with it to return some data
+              onTap: () =>
+                  onDialogTap(DialogResponse(responseData: [controller.text])),
+              child: Container(
+                child: dialogRequest.showIconInMainButton
+                    ? Icon(Icons.check_circle)
+                    : Text(dialogRequest.mainButtonTitle),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

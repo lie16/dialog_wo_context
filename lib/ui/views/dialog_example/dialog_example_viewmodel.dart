@@ -1,4 +1,5 @@
 import 'package:dialog_wo_context/app/locator.dart';
+import 'package:dialog_wo_context/enums/dialog_type.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -40,6 +41,7 @@ class DialogExampleViewModel extends BaseViewModel {
 
   Future showCustomDialog() async {
     var response = await _dialogService.showCustomDialog(
+      variant: DialogType.Form,
       title: 'My custom dialog',
       description: 'This is my dialog description',
       mainButtonTitle: 'Confirm',
