@@ -25,6 +25,11 @@ Widget _customDialogUi(
 ) {
   var dialogType = dialogRequest.customData as DialogType;
   switch (dialogType) {
+    case DialogType.Form:
+      return _FormCustomDialog(
+        dialogRequest: dialogRequest,
+        onDialogTap: onDialogTap,
+      );
     case DialogType.Basic:
     default:
       return _BasicCustomDialog(
