@@ -1,3 +1,4 @@
+import 'package:dialog_wo_context/ui/setup_dialog_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog_wo_context/app/locator.dart';
 import 'package:dialog_wo_context/ui/views/dialog_example/dialog_example_view.dart';
@@ -7,6 +8,7 @@ import 'app/router.gr.dart' as auto_router;
 
 void main() {
   setupLocator();
+  setupDialogUi();
   runApp(MyApp());
 }
 
