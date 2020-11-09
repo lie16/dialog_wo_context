@@ -38,5 +38,12 @@ class DialogExampleViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future showCustomDialog() async {}
+  Future showCustomDialog() async {
+    var response = await _dialogService.showCustomDialog(
+      title: 'My custom dialog',
+      description: 'This is my dialog description',
+      mainButtonTitle: 'Confirm',
+    );
+    print('DialogResponse: ${response?.confirmed}');
+  }
 }
