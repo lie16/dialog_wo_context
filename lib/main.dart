@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dialog no Context',
       home: DialogExampleView(),
       // initialRoute: Routes.startupViewRoute,
       onGenerateRoute: auto_router.Router().onGenerateRoute,
