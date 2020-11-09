@@ -23,7 +23,20 @@ class DialogExampleViewModel extends BaseViewModel {
     print('DialogResponse: ${response?.confirmed}');
   }
 
-  Future showConfirmationDialog() async {}
+  Future showConfirmationDialog() async {
+    var response = await _dialogService.showConfirmationDialog(
+      title: 'The Confirmation Dialog',
+      description: 'Do you want to update Confirmation state in the UI?',
+      confirmationTitle: 'Yes',
+      dialogPlatform: DialogPlatform.Material,
+      cancelTitle: 'No',
+    );
+
+    _confirmationResult = response?.confirmed;
+
+    print('DialogResponse: ${response?.confirmed}');
+    notifyListeners();
+  }
 
   Future showCustomDialog() async {}
 }
