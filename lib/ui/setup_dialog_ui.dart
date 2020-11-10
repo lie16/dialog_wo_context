@@ -3,13 +3,12 @@ import 'package:dialog_wo_context/enums/dialog_type.dart';
 import 'package:dialog_wo_context/ui/smart_widgets/dialog/basic_custom_dialog.dart';
 import 'package:dialog_wo_context/ui/smart_widgets/dialog/form_custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void setupDialogUi() {
   var dialogService = locator<DialogService>();
   dialogService.registerCustomDialogBuilder(
-    variant: DialogType.Basic,
+    variant: DialogType.Form,
     builder: (BuildContext context, DialogRequest dialogRequest) => Dialog(
       backgroundColor: Colors.transparent,
       child: Align(
