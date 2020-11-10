@@ -28,10 +28,16 @@ class DialogExampleView extends StatelessWidget {
               Text('Confirmation result: ${model.confirmationResult}'),
               SizedBox(height: 25),
               OutlineButton(
-                child: Text('Show Custom Dialog'),
-                onPressed: () => model.showCustomDialog(),
+                child: Text('Show Custom Basic Dialog'),
+                onPressed: () => model.showCustomBasicDialog(),
               ),
               Text('Custom Dialog result: ${model.customDialogResult}'),
+              SizedBox(height: 25),
+              OutlineButton(
+                child: Text('Show Custom Form Dialog'),
+                onPressed: () => model.showCustomFormDialog(),
+              ),
+              Text('Custom Dialog result: ${model.dialogResponseString}')
             ],
           ),
         ),
