@@ -7,8 +7,13 @@ class DialogExampleViewModel extends BaseViewModel {
   bool _confirmationResult;
   bool get confirmationResult => _confirmationResult;
 
+  //This Part got one problem
   DialogResponse _dialogResponse;
   DialogResponse get customDialogResult => _dialogResponse;
+
+  String _dialogResponseString;
+  String get dialogResponseString => _dialogResponseString;
+
   final _dialogService = locator<DialogService>();
 
   Future showBasicDialog() async {
@@ -39,13 +44,28 @@ class DialogExampleViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future showCustomDialog() async {
+  Future showCustomBasicDialog() async {
+    var response = await _dialogService.showCustomDialog(
+      variant: DialogType.Basic,
+      title: 'My custom basic dialog',
+      description: 'This is my dialog description',
+      mainButtonTitle: 'Confirm',
+    );
+    //Form for custom Basic use _confirmationResult
+    _dialogResponse = response;
+    print('DialogResponse: ${response?.responseData}');
+    notifyListeners();
+  }
+
+  Future showCustomFormDialog() async {
     var response = await _dialogService.showCustomDialog(
       variant: DialogType.Form,
       title: 'My custom dialog',
       description: 'This is my dialog description',
       mainButtonTitle: 'Confirm',
     );
-    print('DialogResponse: ${response?.confirmed}');
+    _dialogResponseString = response?.responseData[0];
+    print('_dRepsonse: ' + _dialogResponseString);
+    notifyListeners();
   }
 }
