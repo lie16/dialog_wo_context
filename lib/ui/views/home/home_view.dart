@@ -37,11 +37,11 @@ class HomeView extends StatelessWidget {
           onTap: model.setIndex,
           items: [
             BottomNavigationBarItem(
-              title: Text('Posts'),
+              label: 'Posts',
               icon: Icon(Icons.art_track),
             ),
             BottomNavigationBarItem(
-              title: Text('Todos'),
+              label: 'Todos',
               icon: Icon(Icons.list),
             ),
           ],
