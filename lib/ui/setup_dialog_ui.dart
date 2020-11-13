@@ -24,6 +24,23 @@ void setupDialogUi() {
       // )),
     ),
   );
+  dialogService.registerCustomDialogBuilder(
+    variant: DialogType.Basic,
+    builder: (BuildContext context, DialogRequest dialogRequest) => Dialog(
+      backgroundColor: Colors.transparent,
+      child: Align(
+          alignment: Alignment.bottomCenter,
+          child: customDialogUi(
+            dialogRequest,
+            (dialogRespone) => dialogService.completeDialog(dialogRespone),
+          )),
+      // child: _FormCustomDialog(
+      //   dialogRequest: dialogRequest,
+      //   onDialogTap: (dialogRespone) =>
+      //       dialogService.completeDialog(dialogRespone),
+      // )),
+    ),
+  );
 }
 
 Widget customDialogUi(
